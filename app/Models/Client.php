@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     
-    static $rules = [
+   /* static $rules = [
 		'Cedula' => 'required',
 		'Nombre' => 'required',
 		'Apellido' => 'required',
@@ -37,8 +37,23 @@ class Client extends Model
      *
      * @var array
      */
-    protected $fillable = ['Cedula','Nombre','Apellido','Telefono','Correo'];
+    /*protected $fillable = ['Cedula','Nombre','Apellido','Telefono','Correo'];*/
 
+ 
+    protected $table = 'clients'; // nombre exacto de la tabla
+
+    protected $fillable = [
+        'Cedula',
+        'Nombre',
+        'Apellido',
+        'Telefono',
+        'Correo',
+    ];
+
+    public function pedidos()
+    {
+        return $this->hasMany(Pedido::class, 'cliente_id');
+    }
 
 
 }

@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PedidoController; /*pdf*/
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +22,10 @@ Route::get('/', function () {
 });
 Auth::routes();
 
+
+
+Route::get('pedidos/{id}/pdf', [PedidoController::class, 'generarPDF'])->name('pedidos.pdf');// Ruta para generar el PDF
+
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/addcart', [\App\Http\Controllers\AddcartController::class, 'index'])->name('addcart');
@@ -33,7 +40,25 @@ Auth::routes();
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/products', App\Http\Controllers\ProductController::class);
-Route::resource('/categoris', App\Http\Controllers\CategoriController::class);
+Route::resource('/pedidos', App\Http\Controllers\PedidoController::class);
 Route::resource('/pedidos', App\Http\Controllers\PedidoController::class);
 Route::resource('/pedidetalles', App\Http\Controllers\PedidetalleController::class);
-Route::resource('/clients', App\Http\Controllers\ClientController::class);
+Route::resource('/categoris', App\Http\Controllers\CategoriController::class);
+
+//Solicita login para iniciar 
+// Módulos que requieren autenticación
+Route::middleware(['auth'])->group(function () {
+    Route::resource('/products', App\Http\Controllers\ProductController::class);
+    Route::resource('/clients', App\Http\Controllers\ClientController::class); // 🔒 Protegido con login
+    Route::resource('/categoris', App\Http\Controllers\CategoriController::class);
+   
+});
+//Solicita login para editar si no esta logueado 
+// (solo admins pueden acceder a editar)
+//Route::middleware(['auth', 'admin'])->group(function () {
+    //Route::get('/pedidos/{pedido}/edit', [PedidoController::class, 'edit'])->name('pedidos.edit');
+    //Route::delete('/pedidos/{pedido}', [PedidoController::class, 'destroy'])->name('pedidos.destroy');});//editar
+
+
+
+

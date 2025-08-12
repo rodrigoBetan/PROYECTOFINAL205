@@ -312,6 +312,7 @@
     margin-bottom: 25px;
     margin-left: -300px;
     margin-top: 50px;
+   
 }
 
 .info-txt p{
@@ -319,6 +320,7 @@
     color: #444444;
     margin-bottom: 60PX;
     margin-left: -505px;
+    text-align: center; /* 👈 Aquí centras el texto */
    
 
 }
@@ -538,6 +540,5 @@
         margin: 25px 0px 10px 0px;
     }
     /*FONTER*/
-}
 
- 
+}

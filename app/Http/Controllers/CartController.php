@@ -23,7 +23,7 @@ class CartController extends Controller
             1,
             $producto->precio
         );
-        return redirect()->back()->with("success","itemagregado");
+        return redirect()->back()->with("success","Producto_Agregado");
     }
 
     //muestra la vista del carrito
@@ -67,7 +67,7 @@ class CartController extends Controller
          foreach(Cart::content() as $item){
             $pedidetalle=new Pedidetalle();
             $pedidetalle->Cantidad=$item->qty;
-            $pedidetalle->descuento=0;
+           // $pedidetalle->descuento=0;
             $pedidetalle->Precio_Total= $item->price* $item->qty;
             $pedidetalle->id_pedidos=$pedido->id;									
             $pedidetalle->id_products=$item->id;
@@ -76,7 +76,7 @@ class CartController extends Controller
 
          Cart::destroy();
          return redirect()->route('pedidos.index')
-            ->with('success', 'Pedido created successfully.');
+            ->with('success', '📋 Lista de Pedidos Creados.');
      }
  
 

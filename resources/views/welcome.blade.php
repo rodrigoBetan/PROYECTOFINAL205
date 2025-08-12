@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-  
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cafe Star</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
@@ -28,9 +28,10 @@
                     <ul>
                       
                         <li><a href="#">Inicio</a></li>
-                        <li><a href="pedidetalles">Servicos</a></li>
-                        <li><a href="products">Productos</a></li>
-                        
+                        <li><a href="pedidetalles">Productos</a></li>
+                        <li><a href="categoris">Categorias</a></li>
+                      
+                     
                         @if (Route::has('login'))
                         
                             @auth
@@ -185,6 +186,7 @@
     <!--</header>-->
 
     <!--Productos1-->
+
     <main class="products">
         <div class="tabs container">
     

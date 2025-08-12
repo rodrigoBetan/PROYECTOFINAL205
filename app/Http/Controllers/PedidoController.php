@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use Illuminate\Http\Request;
-
+use Barryvdh\DomPDF\Facade\Pdf; // arriba del controlador
 /**
  * Class PedidoController
  * @package App\Http\Controllers
@@ -22,6 +22,9 @@ class PedidoController extends Controller
 
         return view('pedido.index', compact('pedidos'))
             ->with('i', (request()->input('page', 1) - 1) * $pedidos->perPage());
+
+                   
+            
     }
 
     /**
@@ -45,10 +48,12 @@ class PedidoController extends Controller
     {
         request()->validate(Pedido::$rules);
 
-        $pedido = Pedido::create($request->all());
+       /* $pedido = Pedido::create($request->all());*/
+       $pedido = Pedido::with('detalles.producto')->findOrFail($id);/*pdf*/
 
+        Pedido::create($request->all());/**pdf */
         return redirect()->route('pedidos.index')
-            ->with('success', 'Pedido created successfully.');
+            ->with('success', '📋 Lista de Pedidos Creados.');
     }
 
     /**
@@ -91,7 +96,7 @@ class PedidoController extends Controller
         $pedido->update($request->all());
 
         return redirect()->route('pedidos.index')
-            ->with('success', 'Pedido updated successfully');
+            ->with('success', 'Pedido Actualizado con Exito');
     }
 
     /**
@@ -104,6 +109,49 @@ class PedidoController extends Controller
         $pedido = Pedido::find($id)->delete();
 
         return redirect()->route('pedidos.index')
-            ->with('success', 'Pedido deleted successfully');
+            ->with('success', 'Pedido Eliminado con Exito');
+    }
+
+            //pdf
+           
+            // ✅ Método para generar PDF
+   /* public function generarPDF($id)
+    {
+        $pedido = Pedido::findOrFail($id);
+
+        // Cargar vista PDF
+        $pdf = Pdf::loadView('pedido.pdf', compact('pedido'));
+
+        // Descargar el archivo
+        return $pdf->download("pedido_{$pedido->id}.pdf");
+    }
+            */
+            public function pedido()
+            {
+                return $this->belongsTo(Pedido::class, 'pedido_id');
+            }
+            
+            public function producto()
+            {
+                return $this->belongsTo(Producto::class, 'producto_id');
+            }
+            
+                /**pdf */
+
+                public function generarPDF($id)
+    {
+        // Cargar el pedido con sus detalles y productos
+        $pedido = Pedido::with(['detalles.producto'])->findOrFail($id);
+
+        // Si no hay detalles, mostramos un error más claro
+        if ($pedido->detalles->isEmpty()) {
+            return back()->with('error', 'Este pedido no tiene productos asociados.');
+        }
+
+        // Cargar la vista del PDF y pasar el pedido
+        $pdf = Pdf::loadView('pedido.pdf', compact('pedido'));
+
+        // Descargar el archivo con el nombre formateado
+        return $pdf->download("pedido_{$pedido->id}.pdf");
     }
 }

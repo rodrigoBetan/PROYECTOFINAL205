@@ -74,26 +74,12 @@
                                 <tr>
                                     <th class="w-1"><input class="form-check-input m-0 align-middle" type="checkbox"
                                                            aria-label="Select all invoices"></th>
-                                    <th class="w-1">No.
-                                        <!-- Download SVG icon from http://tabler-icons.io/i/chevron-up -->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                             class="icon icon-sm text-dark icon-thick" width="24" height="24"
-                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                             stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                            <polyline points="6 15 12 9 18 15"/>
-                                        </svg>
-                                    </th>
-                                    
-										<th>Cedula</th>
-										<th>Nombre</th>
-										<th>Apellido</th>
-										<th>Telefono</th>
-										<th>Correo</th>
-
-
-                                        
-
+                                    <th class="w-1">No.</th>
+                                    <th>Cedula</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Telefono</th>
+                                    <th>Correo</th>
                                     <th class="w-1"></th>
                                 </tr>
                                 </thead>
@@ -104,13 +90,11 @@
                                         <td><input class="form-check-input m-0 align-middle" type="checkbox"
                                                    aria-label="Select client"></td>
                                         <td>{{ ++$i }}</td>
-                                        
-											<td>{{ $client->Cedula }}</td>
-											<td>{{ $client->Nombre }}</td>
-											<td>{{ $client->Apellido }}</td>
-											<td>{{ $client->Telefono }}</td>
-											<td>{{ $client->Correo }}</td>
-
+                                        <td>{{ $client->Cedula }}</td>
+                                        <td>{{ $client->Nombre }}</td>
+                                        <td>{{ $client->Apellido }}</td>
+                                        <td>{{ $client->Telefono }}</td>
+                                        <td>{{ $client->Correo }}</td>
                                         <td>
                                             <div class="btn-list flex-nowrap">
                                                 <div class="dropdown">
@@ -133,25 +117,28 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
-                                                                    onclick="if(!confirm('🗑️ Confirmar:: Eliminar el Cliente?')){return false;}"
-                                                                    class="dropdown-item text-red"><i
-                                                                    class="fa fa-fw fa-trash"></i>
-                                                                Eliminar
+                                                                    onclick="if(!confirm('Do you Want to Proceed2?')){return false;}"
+                                                                    class="dropdown-item text-red">
+                                                                <i class="fa fa-fw fa-trash"></i> Eliminar
                                                             </button>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
+                                            
+                                            <!-- 🔹 Botón para consultar pedidos -->
+                                            <button class="btn btn-info mt-2" onclick="consultarPedidos({{ $client->id }})">
+                                                Ver Pedidos
+                                            </button>
                                         </td>
                                     </tr>
                                 @empty
-                                    <td>No Data Found</td>
+                                    <td colspan="7">No Data Found</td>
                                 @endforelse
                                 </tbody>
-
                             </table>
                         </div>
-                       <div class="card-footer d-flex align-items-center">
+                        <div class="card-footer d-flex align-items-center">
                             {!! $clients->links('tablar::pagination') !!}
                         </div>
                     </div>
@@ -159,4 +146,25 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+<script>
+    function consultarPedidos(clienteId) {
+        fetch(`/clientes/${clienteId}/pedidos`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    let pedidosInfo = "Pedidos del Cliente:\n";
+                    data.forEach(pedido => {
+                        pedidosInfo += `ID Pedido: ${pedido.id}, Total: ${pedido.Total}\n`;
+                    });
+                    alert(pedidosInfo);
+                } else {
+                    alert("Este cliente no tiene pedidos.");
+                }
+            })
+            .catch(error => console.error('Error al obtener los pedidos:', error));
+    }
+</script>
 @endsection

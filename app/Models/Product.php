@@ -21,7 +21,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
-    
+
+  /*protected $table = 'products'; // o el nombre real de tu tabla*/
+
     static $rules = [
 		'nombre' => 'required',
 		'imagen' => 'required',
@@ -45,6 +47,10 @@ class Product extends Model
     public function pedidos(){
       return $this->hasMany(Pedido::class,'id');
     }
-
+/**pdf */
+    public function detalles()
+    {
+      return $this->hasMany(Pedidetalle::class, 'id_products', 'id');
+    }
 
 }

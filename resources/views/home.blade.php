@@ -109,5 +109,13 @@
                                 </p>
                             </div>
 
+                            
+                            {{-- Etiqueta QR --}}
+                            <div class="qr-etiqueta" style="text-align: center; margin-top: 20px;">
+    <h4>Escanea para abrir el sistema</h4>
+    {!! QrCode::size(180)->margin(2)->generate(url('/')) !!}
+</div>
+
+
 
 @endsection

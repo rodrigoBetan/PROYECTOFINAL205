@@ -6,6 +6,7 @@ use App\Models\Categori;
 use App\Models\Pedido;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode; // Importar la clase
 
 class HomeController extends Controller
 {
@@ -32,7 +33,14 @@ class HomeController extends Controller
         $totalCategoria=count(Categori::all());
         $totalVentas = Pedido::sum('Total');
 
+              // Generar el QR como HTML y pasarlo a la vista
+        $qr = QrCode::size(150)->generate('http://127.0.0.1:8000/');
 
-        return view('home',compact(['totalproductos','totalpedidos','totalCategoria','totalVentas']));
+        
+
+        return view('home',compact(['qr','totalproductos','totalpedidos','totalCategoria','totalVentas']));
     }
+     
+
 }
+

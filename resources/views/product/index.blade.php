@@ -1,5 +1,5 @@
 @extends('tablar::page')
-
+ 
 @section('title')
     Product
 @endsection
@@ -134,7 +134,7 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
-                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
+                                                                    onclick="if(!confirm(' 🗑️ Confirmar:: Eliminar el Item?')){return false;}"
                                                                     class="dropdown-item text-red"><i
                                                                     class="fa fa-fw fa-trash"></i>
                                                                 Borrar
@@ -159,5 +159,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
+    
 @endsection

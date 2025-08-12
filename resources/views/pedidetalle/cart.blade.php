@@ -15,8 +15,9 @@
                         List
                     </div>
                     <h2 class="page-title">
-                        {{ __('Product ') }}
+                       {{ __('✔️ Confirmar Pedido ') }}
                     </h2>
+                    
                 </div>
                 <!-- Page title actions -->
                
@@ -42,7 +43,8 @@
 										<th>cantidad</th>
 										<th>precio unitario</th>
                                         <th>precio total</th>
-										
+										<th>Eliminar Item</th>
+                                        <th>Mesa</th>
                                     <th class="w-1"></th>
                                 </tr>
                                 </thead>
@@ -70,10 +72,21 @@
                                                             @csrf    
                                                             <input type="hidden" name="rowId" value="{{$product->rowId}}">                                                        
                                                             <button type="submit"
-                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
+                                                                    onclick="if(!confirm(' 🗑️ Confirmar:: Eliminar el Item del Pedido?')){return false;}"
                                                                     class="btn btn-danger btn-sm">
                                                                 X
                                                             </button>
+                                                            <!-- Botn de la mesa  -->
+                                                            <td>
+                                                            <select name="mesa" id="mesa-3"> <!-- id único por fila -->
+                                                            <option value="1">Mesa 1</option>
+                                                             <option value="2">Mesa 2</option>
+                                                             <option value="3" selected>Mesa 3</option> <!-- si quieres que la mesa 3 esté seleccionada por defecto -->
+                                                             <option value="4">Mesa 4</option>
+                                                              <option value="5">Mesa 5</option>
+    </select>
+  </td>
+                                                            
                                                         </form>
                                                     
                                                 
@@ -102,19 +115,17 @@
                                     <td colspan="3"></td>
                                     <td class="text-end">Total</td>
                                     <td>{{Cart::total()}}</td>                                    
-
-                                </tr>
                                
                             </table>
                         </div>
                        <div class="card-footer">
                         <div class="row">
                         <div class="col-3 text-stard">
-                          <a href="{{route('cartstore')}}" class="btn btn-success "> confirmar compra</a>
+                          <a href="{{route('cartstore')}}" class="btn btn-success "> Confirmar Compra</a>
                             
                         </div>
                         <div class="col-3 text-rigth">
-                            <a href="{{route('clear')}}" class="btn btn-danger"> cancelar</a>
+                            <a href="{{route('clear')}}" class="btn btn-danger"> Cancelar</a>
                               
                           </div>
                         </div>

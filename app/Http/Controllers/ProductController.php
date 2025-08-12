@@ -9,12 +9,16 @@ use Symfony\Contracts\Service\Attribute\Required;
 use App\Models\Categori;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+
+
+
 /**
  * Class ProductController
  * @package App\Http\Controllers
  */
 class ProductController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -33,14 +37,19 @@ class ProductController extends Controller
         
          }
 
+
+         
+
     public function index()
     {
       
-
-        $products = Product::paginate(10);
+      $products = Product::paginate(10);
 
         return view('product.index', compact('products'))
             ->with('i', (request()->input('page', 1) - 1) * $products->perPage());
+
+            
+
     }
 
     /**
@@ -78,7 +87,7 @@ class ProductController extends Controller
                 'imagen'=>'Required|image|mimes:jpeg,png,jpg,git|max:2048',
                 'descripcion'=>'Required',
                 'precio'=>'Required',
-                'sctock'=>'Required',
+                'stock' => 'required|numeric', // ← corregido
                
                
 
@@ -128,8 +137,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-       /* $categoria = Categori::query()->pluck('nombre', 'id')->all();*/
-      
+        /*$categoria = Categori::query()->pluck('nombre', 'id')->all();*/
+        $categoria = \App\Models\Categori::query()->pluck('nombre', 'id')->toArray();
          
 
         return view('product.edit', compact('product','categoria'));
@@ -142,7 +151,7 @@ class ProductController extends Controller
      * @param  Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    /*public function update(Request $request, Product $product)
     {
         request()->validate(Product::$rules);
 
@@ -150,7 +159,40 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')
             ->with('success', 'Product updated successfully');
+    }*/
+
+    public function update(Request $request, Product $product)
+{
+    $request->validate([
+        'nombre' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'precio' => 'required|numeric',
+        'sctock' => 'required|numeric', // ← igual que en tu DB
+        'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'categoria' => 'required|exists:categoris,id'
+    ]);
+
+    // Actualizar datos básicos
+    $product->nombre = $request->nombre;
+    $product->descripcion = $request->descripcion;
+    $product->precio = $request->precio;
+    $product->sctock = $request->sctock;
+    $product->id_Categoria = $request->categoria;
+
+    // Manejo de imagen
+    if ($request->hasFile('imagen')) {
+        $imagen = $request->file('imagen');
+        $nombreImagen = time().'.'.$imagen->getClientOriginalExtension();
+        $imagen->move(public_path('img'), $nombreImagen);
+        $product->imagen = $nombreImagen;
     }
+
+    $product->save();
+
+    return redirect()->route('products.index')
+        ->with('success', 'Producto actualizado correctamente.');
+}
+
 
     /**
      * @param int $id

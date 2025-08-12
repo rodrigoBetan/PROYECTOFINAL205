@@ -85,12 +85,13 @@
                                             <polyline points="6 15 12 9 18 15"/>
                                         </svg>
                                     </th>
-                                   
+                                    
 										<th>Subtotal</th>
 										<th>Impuesto</th>
 										<th>Total</th>
 										<th>Entrega</th>
-
+                                        <th>Opciones</th>
+                                       
                                     <th class="w-1"></th>
                                 </tr>
                                 </thead>
@@ -102,18 +103,19 @@
                                                    aria-label="Select pedido"></td>
                                         <td>{{ ++$i }}</td>
                                         
-                                            
+                                        
 											<td>{{ $pedido->Subtotal }}</td>
 											<td>{{ $pedido->Impuesto }}</td>
 											<td>{{ $pedido->Total }}</td>
 											<td>{{ $pedido->Entrega }}</td>
-
+                                            
+                                    
                                         <td>
                                             <div class="btn-list flex-nowrap">
                                                 <div class="dropdown">
                                                     <button class="btn dropdown-toggle align-text-top"
                                                             data-bs-toggle="dropdown">
-                                                        Actions
+                                                        Opciones
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-end">
                                                         <a class="dropdown-item"
@@ -130,7 +132,7 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
-                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
+                                                                    onclick="if(!confirm(' 🗑️ Confirmar:: Eliminar el Pedido??')){return false;}"
                                                                     class="dropdown-item text-red"><i
                                                                     class="fa fa-fw fa-trash"></i>
                                                                 Borrar
