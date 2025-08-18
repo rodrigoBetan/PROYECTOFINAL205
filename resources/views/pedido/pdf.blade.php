@@ -81,8 +81,9 @@
 
     <!-- Datos del cliente -->
     <div class="info">
-        <p><strong>Cliente:</strong> {{ $pedido->cliente->nombre ?? 'Sin nombre' }}</p>
+        <p><strong>Cliente:</strong> {{ $pedido->cliente->nombre ?? 'Cliente' }}</p>
         <p><strong>Fecha:</strong> {{ $pedido->created_at->format('d/m/Y') }}</p>
+        <p><strong>Mesa:</strong> {{ $pedido->mesa }}</p>
 
     </div>
 
@@ -94,6 +95,8 @@
                 <th>Cantidad</th>
                 <th>Precio Unitario</th>
                 <th>Precio Total</th>
+          
+
             </tr>
         </thead>
         <tbody>
@@ -103,6 +106,7 @@
                     <td>{{ $detalle->Cantidad }}</td>
                     <td>${{ number_format($detalle->producto->precio, 2) }}</td>
                     <td>${{ number_format($detalle->Precio_Total, 2) }}</td>
+                
                 </tr>
             @endforeach
         </tbody>
@@ -113,19 +117,25 @@
         <table>
             <thead>
                 <tr>
+                
+                    <th>Mesa</th>-- agregar mesa
                     <th>Subtotal</th>
                     <th>Impuesto</th>
                     <th>Total</th>
                     <th>Entrega</th>
-                    <!--<th>Mesa</th>-- agregar mesa-->
+                    
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                
+                    <td>{{ $pedido->mesa }}</td> <!-- 👈 muestra la mesa -->
                     <td>${{ number_format($pedido->Subtotal, 2) }}</td>
                     <td>${{ number_format($pedido->Impuesto, 2) }}</td>
                     <td>${{ number_format($pedido->Total, 2) }}</td>
                     <td>{{ $pedido->Entrega }}</td>
+                    
+                   
                 </tr>
             </tbody>
         </table>

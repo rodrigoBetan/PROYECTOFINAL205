@@ -34,7 +34,13 @@ Route::post('/cart/add', [\App\Http\Controllers\CartController::class, 'add'])->
 Route::get('/cart/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
 Route::get('/cart/clear', [\App\Http\Controllers\CartController::class, 'clear'])->name('clear');
 Route::post('/cart/remove', [\App\Http\Controllers\CartController::class, 'removeitem'])->name('removeitem');
-Route::get('/cart/store', [\App\Http\Controllers\CartController::class, 'cartstore'])->name('cartstore');
+//Route::get('/cart/store', [\App\Http\Controllers\CartController::class, 'cartstore'])->name('cartstore');//
+Route::post('/cart/store', [\App\Http\Controllers\CartController::class, 'cartstore'])->name('cartstore');
+
+
+
+
+
 Auth::routes();
 
 Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -44,6 +50,9 @@ Route::resource('/pedidos', App\Http\Controllers\PedidoController::class);
 Route::resource('/pedidos', App\Http\Controllers\PedidoController::class);
 Route::resource('/pedidetalles', App\Http\Controllers\PedidetalleController::class);
 Route::resource('/categoris', App\Http\Controllers\CategoriController::class);
+
+
+
 
 //Solicita login para iniciar 
 // Módulos que requieren autenticación

@@ -59,22 +59,34 @@
                         </div>
                         <div class="card-body">
                             
-<div class="form-group">
-<strong>Subtotal:</strong>
-{{ $pedido->Subtotal }}
-</div>
-<div class="form-group">
-<strong>Impuesto:</strong>
-{{ $pedido->Impuesto }}
-</div>
-<div class="form-group">
-<strong>Total:</strong>
-{{ $pedido->Total }}
-</div>
-<div class="form-group">
-<strong>Entrega:</strong>
-{{ $pedido->Entrega }}
-</div>
+
+<!--ESTOS COMAMANDO ME SIRVEN PARA TRAER LA VISTA DE VALORES PEDIDO-->
+
+
+               <div class="form-group">
+                    <strong>Mesa:</strong>
+                     {{ $pedido->mesa }}                  
+                </div>
+
+                <div class="form-group">
+                    <strong>Subtotal:</strong>
+                     {{ $pedido->Subtotal }}                  
+                </div>
+
+                 <div class="form-group">
+                    <strong>Impuesto:</strong>
+                     {{ $pedido->Impuesto }}                  
+                </div>
+
+                <div class="form-group">
+                    <strong>Total:</strong>
+                    {{ $pedido->Total }}
+                </div>
+
+                <div class="form-group">
+                    <strong>Entrega:</strong>
+                    {{ $pedido->Entrega }}
+                </div>
 
                         </div>
                     </div>

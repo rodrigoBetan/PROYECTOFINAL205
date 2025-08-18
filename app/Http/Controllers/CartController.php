@@ -51,12 +51,17 @@ class CartController extends Controller
         return redirect()->back()->with("success","carrito vacio");
      }
 
-     public function cartstore()
+     public function cartstore(Request $request)
 
      {
+        $request->validate([
+            'mesa' => 'required'
+        ]);
          //guardar  venta en base de datos
          //tabla venta
          $pedido = new Pedido();
+         $pedido->mesa = $request->mesa;
+
          $pedido->Subtotal = Cart::subtotal();
          $pedido->Impuesto = Cart::tax();
          $pedido-> Total= Cart::total();

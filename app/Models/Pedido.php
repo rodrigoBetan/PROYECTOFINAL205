@@ -32,6 +32,7 @@ class Pedido extends Model
 		'Impuesto' => 'required',
 		'Total' => 'required',
 		'Entrega' => 'required',
+    'mesa' => 'required',
 
   
     ];
@@ -46,7 +47,7 @@ class Pedido extends Model
      *
      * @var array
      */
-    protected $fillable = ['Subtotal','Impuesto','Total','Entrega'];
+    protected $fillable = ['Subtotal','Impuesto','Total','Entrega','mesa'];
     public function users(){
       return $this->belongsTo(User::class,'id_user');
     }
@@ -76,8 +77,11 @@ class Pedido extends Model
     {
       return $this->hasMany(Pedidetalle::class, 'id_pedidos');
     }
-}
-  /** */
+  }
+  /** para los valores de mesa*/
+  
+  
+
   
 
 
