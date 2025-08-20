@@ -58,16 +58,39 @@ class CartController extends Controller
             'mesa' => 'required'
         ]);
          //guardar  venta en base de datos
+
+         // 2) Convertir strings del carrito a números (quitan comas de miles)
+        $toDecimal = fn ($s) => (float) str_replace(',', '', $s);
+
+        $subtotal = $toDecimal(Cart::subtotal()); // ej: "3,500.00" -> 3500.00
+        $tax      = $toDecimal(Cart::tax());
+        $total    = $toDecimal(Cart::total());
+        
          //tabla venta
          $pedido = new Pedido();
          $pedido->mesa = $request->mesa;
 
-         $pedido->Subtotal = Cart::subtotal();
-         $pedido->Impuesto = Cart::tax();
-         $pedido-> Total= Cart::total();
+         $pedido->Subtotal = $toDecimal(Cart::subtotal());
+         $pedido->Impuesto = $toDecimal(Cart::tax());
+         $pedido->Total    = $toDecimal(Cart::total());
          $pedido->Entrega = true;
          $pedido->id_user = 2;              
          $pedido->save();
+
+         //  Por cada item del carrito descuente
+         foreach (Cart::content() as $item) {
+            $cantidad = (int) $item->qty;
+            // Bloquear el producto para evitar carreras
+            $producto = Product::lockForUpdate()->findOrFail($item->id);
+
+            /*if ((int)$producto->sctock < $cantidad) 
+                abort(422, "No hay stock suficiente de {$producto->nombre}. Disponible: {$producto->sctock}");*/
+
+               /* if ((int)$producto->sctock < $cantidad) {
+                    // Guardar mensaje de error en sesión
+                    session()->flash('error', "No hay stock suficiente de {$producto->nombre}. 
+                        Disponible: {$producto->sctock}, pero pediste {$cantidad}.");*/
+                
          //guardar datos de pedido detalles
          foreach(Cart::content() as $item){
             $pedidetalle=new Pedidetalle();
@@ -77,6 +100,12 @@ class CartController extends Controller
             $pedidetalle->id_pedidos=$pedido->id;									
             $pedidetalle->id_products=$item->id;
             $pedidetalle->save();
+
+             // 4.3) Descontar del inventario (columna sctock)
+             $producto->sctock = (int)$producto->sctock - $cantidad;
+             $producto->save();
+
+             
          }
 
          Cart::destroy();
@@ -85,4 +114,5 @@ class CartController extends Controller
      }
  
 
+}
 }

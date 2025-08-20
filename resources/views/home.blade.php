@@ -51,27 +51,68 @@
         </div>
     </div>
     <!-- Page body -->
-    
-    <div class="row m-3">
-    <h3 class="fw-bold fs-4 mb-3"></h3>
-    {{-- tarjeta principal --}}
-    <div class="card text-bg-primary m-3" style="max-width: 18rem;">
-       
-        <div class="card-header"><i class="ti ti-shopping-cart me-5"> </i><span> PRODUCTOS</span></div>   
-        <div class="card-body">
-          <h5 class="card-title">CANTIDAD DE PRODUCTOS</h5>
-          <p class="card-text">CREADOS Y ACTIVOS PARA LA DISTRIBUCION</p>
-        </div>
-              
-                </h5>
-                <p class="mb-2 fw-bold">
-                   
-                    <span>TOTAL  = <span class="ms-3">{{ $totalproductos }}</span>
-                </p>
+    <div class="container">
+    <div class="row justify-content-center">
+        <!-- TARJETA PRODUCTOS -->
+        <div class="col-md-5">
+        <div class="card text-bg-primary m-3 style= max-width: 18rem;">
+                <div class="card-header"><i class="ti ti-shopping-cart me-2"></i> PRODUCTOS</div>   
+                <div class="card-body">
+                    <h5 class="card-title">CANTIDAD DE PRODUCTOS</h5>
+                    <p class="card-text">CREADOS Y ACTIVOS PARA LA DISTRIBUCION</p>
+                    <p class="fw-bold">TOTAL = <span class="ms-3">{{ $totalproductos }}</span></p>
+                </div>
             </div>
-      
-            
-            <div class="card text-bg-success m-3" style="max-width: 18rem;">
+        </div>
+<!--ETIQUETA DEL sctock-->
+             
+<div class="col-md-3">
+
+<div class="card text-bg-primary m-3 style= max-width: 18rem;">
+        <div class="card-header">
+            <i class="ti ti-shopping-cart me-2"></i><span> INVENTARIO</span>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">PRODUCTOS</h5>
+
+            <!-- Campo de búsqueda -->
+            <input type="text" id="buscarProducto" class="form-control mb-3" placeholder="Buscar producto...">
+
+            <!-- Lista de productos (inicialmente vacía) -->
+            <div id="listaProductos"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Guardamos los productos en JS esta realizando una consulta en la bd
+    const productos = @json(\App\Models\Product::select('nombre','sctock')->get());
+
+    const input = document.getElementById("buscarProducto");
+    const lista = document.getElementById("listaProductos");
+
+    input.addEventListener("keyup", function() {
+        let filtro = this.value.toLowerCase();
+        lista.innerHTML = ""; // limpiar resultados 
+
+        if (filtro.length > 0) {
+            let resultados = productos.filter(p => p.nombre.toLowerCase().includes(filtro));
+
+            if (resultados.length > 0) {
+                resultados.forEach(p => {
+                    lista.innerHTML += `<p><strong>${p.nombre}</strong> - sctock: ${p.sctock}</p>`;
+                });
+            } else {
+                lista.innerHTML = "<p>Productos no Encontrados </p>";
+            }
+        }
+    });
+</script>
+
+
+<!--SKOP-->
+
+            <div class="card text-bg-success m-5" style="max-width: 18rem;">
                 <div class="card-header"><i class="ti ti-shopping-bag-edit me-5"> </i><span> PEDIDOS</span></div>             
                 <div class="card-body">
                   <h5 class="card-title">CANTIDAD DE PEDIDOS REALIZADOS </h5>
@@ -92,9 +133,9 @@
                     
 
 
+                    
 
-
-                    <div class="card text-bg-danger m-3" style="max-width: 18rem;">
+                    <div class="card text-bg-danger m-5" style="max-width: 18rem;">
                        
                         <div class="card-header"><i class="ti ti-category me-5 "> </i><span> CATEGORIAS</span></div>
                         <div class="card-body">
@@ -112,8 +153,8 @@
                             
                             {{-- Etiqueta QR --}}
                             <div class="qr-etiqueta" style="text-align: center; margin-top: 20px;">
-    <h4>Escanea para abrir el sistema</h4>
-    {!! QrCode::size(180)->margin(2)->generate(url('/')) !!}
+                                    <h4>Escanea para abrir el sistema</h4>
+                                {!! QrCode::size(180)->margin(2)->generate(url('/')) !!}
 </div>
 
 

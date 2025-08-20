@@ -93,7 +93,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <!-- FORMULARIO PARA CONFIRMAR PEDIDO -->
-                                    <form action="{{ route('cartstore') }}" method="POST">
+                                    <form action="{{ route('cartstore') }}" method="POST" >
                                         @csrf
                                         <div class="mb-2">
                                             <label for="mesa" class="form-label">Selecciona Mesa</label>

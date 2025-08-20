@@ -109,4 +109,6 @@ class PedidetalleController extends Controller
         return redirect()->route('pedidetalles.index')
             ->with('success', 'Pedidetalle deleted successfully');
     }
+   
+
 }

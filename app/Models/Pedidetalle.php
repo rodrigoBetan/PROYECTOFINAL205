@@ -82,4 +82,6 @@ class Pedidetalle extends Model
     {
         return $this->belongsTo(Product::class, 'id_products');
     }
+     
+
   }

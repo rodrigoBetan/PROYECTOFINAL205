@@ -87,6 +87,7 @@
                     <strong>Entrega:</strong>
                     {{ $pedido->Entrega }}
                 </div>
+                
 
                         </div>
                     </div>

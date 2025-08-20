@@ -87,7 +87,7 @@ class ProductController extends Controller
                 'imagen'=>'Required|image|mimes:jpeg,png,jpg,git|max:2048',
                 'descripcion'=>'Required',
                 'precio'=>'Required',
-                'stock' => 'required|numeric', // ← corregido
+                'sctock' => 'required|numeric', // ← corregido
                
                
 

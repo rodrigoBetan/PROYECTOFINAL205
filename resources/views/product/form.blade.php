@@ -40,7 +40,7 @@
     <div>
         {{ Form::text('sctock', old('sctock', $product->sctock), [
             'class' => 'form-control' . ($errors->has('sctock') ? ' is-invalid' : ''),
-            'placeholder' => 'Stock'
+            'placeholder' => 'sctock'
         ]) }}
         {!! $errors->first('sctock', '<div class="invalid-feedback">:message</div>') !!}
         <small class="form-hint">product <b>sctock</b> instruction.</small>

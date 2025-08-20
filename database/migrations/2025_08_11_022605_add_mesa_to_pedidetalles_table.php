@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('pedidetalles', function (Blueprint $table) {
             //
+            $table->decimal('Precio_Total', 12, 2)->change();
         });
     }
 
@@ -23,6 +24,7 @@ return new class extends Migration
     {
         Schema::table('pedidetalles', function (Blueprint $table) {
             //
+            
         });
     }
 };
