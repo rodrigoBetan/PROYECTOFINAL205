@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PedidoController; /*pdf*/
+use App\Http\Controllers\PedidoExportController;/**EXCEL */
 
 
 /*
@@ -36,7 +37,15 @@ Route::get('/cart/clear', [\App\Http\Controllers\CartController::class, 'clear']
 Route::post('/cart/remove', [\App\Http\Controllers\CartController::class, 'removeitem'])->name('removeitem');
 //Route::get('/cart/store', [\App\Http\Controllers\CartController::class, 'cartstore'])->name('cartstore');//
 Route::post('/cart/store', [\App\Http\Controllers\CartController::class, 'cartstore'])->name('cartstore');
+//EXCEL
+Route::get('/export-pedidos', [PedidoExportController::class, 'export'])->name('export.pedidos');
 
+
+Route::get('pedido/export', [PedidoController::class, 'exportForm'])->name('pedido.exportForm');
+Route::get('pedido/export-excel', [PedidoController::class, 'exportExcel'])->name('export.pedidos');
+
+
+//3 SON EXCEL
 
 
 

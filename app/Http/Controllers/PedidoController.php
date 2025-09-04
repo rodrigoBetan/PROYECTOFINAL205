@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf; // arriba del controlador
-/**
+
+use App\Exports\PedidosExport;
+use Maatwebsite\Excel\Facades\Excel;/**
  * Class PedidoController
  * @package App\Http\Controllers
  */
@@ -21,12 +23,27 @@ class PedidoController extends Controller
         $pedidos = Pedido::paginate(10);
 
         return view('pedido.index', compact('pedidos'))
-            ->with('i', (request()->input('page', 1) - 1) * $pedidos->perPage());
-
-                   
+            ->with('i', (request()->input('page', 1) - 1) * $pedidos->perPage());         
             
     }
+     // FORMULARIO PARA EXPORTAR A EXCEL
+    // -------------------------------
+    public function exportForm()
+    {
+        return view('pedido.export'); // tu vista con los inputs "from" y "to"
+    }
 
+    // -------------------------------
+    // EXPORTACIÓN A EXCEL
+    // -------------------------------
+    public function exportExcel(Request $request)
+    {
+        $from = $request->input('from');
+        $to   = $request->input('to');
+
+        return Excel::download(new PedidosExport($from, $to), 'pedidos.xlsx');
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -154,4 +171,7 @@ class PedidoController extends Controller
         // Descargar el archivo con el nombre formateado
         return $pdf->download("pedido_{$pedido->id}.pdf");
     }
+    //EXCEL 
+
 }
+

@@ -160,15 +160,20 @@ return [
                     'text' => 'clients',
                     'url' => '/clients',
                     'icon' => 'ti ti-article',
+                    
                 ]
             ],
+
+            //'can' => 'auth', //esta comando no ve los modulos sin logue 
+            //'can' => 'auth', 
+            
         ],
 
 
         [
             'text' => 'Productos',
             'url' => '/products',
-            'icon' => 'ti ti-shopping-cart',
+            'icon' => 'ti ti-box',
             'active' => ['support1'],
             'submenu' => [
                 [
@@ -177,6 +182,7 @@ return [
                     'icon' => 'ti ti-article',
                 ]
             ],
+           // 'can' => 'auth',
         ],
 
         [
@@ -191,19 +197,20 @@ return [
                     'icon' => 'ti ti-category-plus',
                 ]
             ],
+           // 'can' => 'auth',
         ],
 
         
         [
             'text' => 'Detalle Pedido',
             'url' => '/pedidetalles',
-            'icon' => 'ti ti-list-details',
+            'icon' => 'ti ti-shopping-cart',
             'active' => ['support1'],
             'submenu' => [
                 [
                     'text' => 'Crear pedido',
                     'url' => '/pedidetalles',
-                    'icon' => 'ti ti-checklist',
+                    'icon' => 'ti ti-package',
                 ],
                 [
                     'text' => 'confirmar pedido',
@@ -225,6 +232,24 @@ return [
                     'icon' => 'ti ti-photo-edit',
                 ]
             ],
+            //'can' => 'auth',
+        ],
+
+        //informes
+        [
+            'text'   => 'Informe',
+            'url'    => '/export', 
+            'icon' => 'ti ti-chart-bar',
+            'active' => ['pedido.exportForm'],
+            'submenu' => [
+                [
+                    'text' => 'pedidos',
+                    'url' => '/pedido/export',
+
+                    'icon' => 'ti ti-report-analytics',
+                ]
+            ],
+            
         ],
 
     ],
