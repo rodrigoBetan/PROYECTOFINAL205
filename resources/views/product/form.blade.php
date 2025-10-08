@@ -55,7 +55,7 @@
             'placeholder' => 'Precio'
         ]) }}
         {!! $errors->first('precio', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">product <b>precio</b> instruction.</small>
+        <small class="form-hint">product <b>precioS</b> instruction.</small>
     </div>
 </div>
 

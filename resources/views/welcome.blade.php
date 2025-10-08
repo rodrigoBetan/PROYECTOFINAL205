@@ -115,8 +115,8 @@
                     experiencia sensorial única y auténtica.
                         </P>
                         <div class="botones">
-                            <a href="#"class= "btn-1">Comprar</a>
-                            <a href="#"class= "btn-1">Menu</a>
+                            <a href="pedidetalles"class= "btn-1">Comprar</a>
+                            <a href="pedidetalles"class= "btn-1">Menu</a>
                         </div>
                     </div>
                     <div class=" slider-img">

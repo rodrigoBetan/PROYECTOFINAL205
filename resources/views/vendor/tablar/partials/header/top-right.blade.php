@@ -5,7 +5,7 @@
             <span class="avatar">CAFE STAR</span>
             <div class="d-none d-xl-block ps-2">
                 <div>{{Auth()->user()->name}}</div>
-                <div class="mt-1 small text-muted">Bienvenidos Lugar Magico</div>
+                <div class="mt-1 small text-muted">Bienvenidos Cafe Start</div>
             </div>
         </a>
         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">

@@ -162,10 +162,11 @@ return [
                     'icon' => 'ti ti-article',
                     
                 ]
+                
             ],
 
             //'can' => 'auth', //esta comando no ve los modulos sin logue 
-            //'can' => 'auth', 
+           // 'can' => 'auth', 
             
         ],
 
@@ -182,7 +183,7 @@ return [
                     'icon' => 'ti ti-article',
                 ]
             ],
-           // 'can' => 'auth',
+           //'can' => 'auth',
         ],
 
         [
@@ -197,7 +198,7 @@ return [
                     'icon' => 'ti ti-category-plus',
                 ]
             ],
-           // 'can' => 'auth',
+            //'can' => 'auth',
         ],
 
         
@@ -218,6 +219,7 @@ return [
                     'icon' => 'ti ti-checklist',
                 ]
             ],
+           // 'can' => 'auth',
         ],
 
         [
@@ -249,7 +251,7 @@ return [
                     'icon' => 'ti ti-report-analytics',
                 ]
             ],
-            
+            //'can' => 'auth',
         ],
 
     ],

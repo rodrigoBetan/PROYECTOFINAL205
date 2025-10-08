@@ -140,10 +140,10 @@
         text-transform: uppercase;
         font-weight: 800;
     }
-
+/*texto de cafe princip*/
     .slider-txt p{
         font-size: 18px;
-        color: #0f0e0e;
+        color: #181515;
     }
 
     .botones{
@@ -261,15 +261,15 @@
 
 .product-txt h4{
 
-    color: #0f0f0f;
+    color: #c91f1f;
     font-size: 18px;
     text-transform: uppercase;
     font-weight: 800;
     margin-bottom: 5px;
 }
-
+/*texto de cafet,postres,*/
 .product-txt p{
-    color: #5c5b5b;
+    color: #181515;
     font-size: 16px;
     margin-bottom: 15px;
 
@@ -303,7 +303,7 @@
 .info-txt{
     width: 50%;
 }
-
+/*text informacion titul*/
 .info-txt h2{
     font-size: 75px;
     color: #0f0f0f;
@@ -314,13 +314,13 @@
     margin-top: 50px;
    
 }
-
+/*Del text informacion */
 .info-txt p{
     font-size: 20px;
-    color: #444444;
+    color: #181515;
     margin-bottom: 60PX;
     margin-left: -505px;
-    text-align: center; /* 👈 Aquí centras el texto */
+    text-align: center; 
    
 
 }
@@ -347,11 +347,11 @@
 }
 
 .horario-info h2{
-    font-size: 75px;
+    font-size: 40px;
     color: #0a0909;
     font-weight: 800;
     text-transform: uppercase;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 
 }
 
@@ -384,15 +384,16 @@
     display: flex;
     justify-content: space-between;
 }
+/*texto link parte de abaj*/
 .links h4{
     color: #0f0f0f;
     text-transform: uppercase;
     margin-bottom: 25px;
 
 }
-
+ /*textos de adebajo*/
 .links ul li a{
-    color: #0f0f0f;
+    color: #080202;
     font-size: 16px;
     margin-bottom: 5px;
     display: inline-block;
